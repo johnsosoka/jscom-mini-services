@@ -36,4 +36,5 @@ locals {
   api_domain_name = data.terraform_remote_state.jscom_web_data.outputs.custom_domain_name
   api_gateway_id = data.terraform_remote_state.jscom_web_data.outputs.api_gateway_id
   api_gateway_target = data.terraform_remote_state.jscom_web_data.outputs.custom_domain_name_target
+  root_zone_id = data.terraform_remote_state.jscom_common_data.outputs.root_johnsosokacom_zone_id
 }
