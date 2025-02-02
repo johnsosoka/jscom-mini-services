@@ -1,3 +1,10 @@
+# local
+*.iml
+.idea
+.terraform
+builds/
+*.hcl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
