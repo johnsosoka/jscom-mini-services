@@ -5,6 +5,12 @@
 builds/
 *.hcl
 
+# Terraform
+terraform.tfvars
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -10,12 +10,12 @@ module "update_dns_lambda" {
   runtime            = "python3.8"
   source_path        = "../lambdas/src/update_dns_lambda.py"
   attach_policy_json = true
-  policy_json        = jsonencode({
-    Version   = "2012-10-17"
+  policy_json = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = [
+        Effect = "Allow"
+        Action = [
           "route53:ChangeResourceRecordSets"
         ]
         Resource = "arn:aws:route53:::hostedzone/${local.root_zone_id}"
@@ -36,7 +36,7 @@ module "update_dns_lambda" {
 resource "aws_apigatewayv2_integration" "update_dns_integration" {
   api_id                 = local.api_gateway_id
   integration_type       = "AWS_PROXY"
-  integration_method     = "POST"   # Must be POST for Lambda proxy integrations
+  integration_method     = "POST" # Must be POST for Lambda proxy integrations
   integration_uri        = module.update_dns_lambda.lambda_function_invoke_arn
   payload_format_version = "2.0"
 }

@@ -206,14 +206,15 @@ def dns_update(
 
             # Display success
             console.print(f"[green]Success![/green] {result.message}")
-            if result.change_info:
-                console.print("\n[cyan]Change Info:[/cyan]")
-                change_table = Table(show_header=False, box=None)
-                change_table.add_column("Key", style="cyan")
-                change_table.add_column("Value", style="white")
-                for key, value in result.change_info.items():
-                    change_table.add_row(key, str(value))
-                console.print(change_table)
+            console.print("\n[cyan]DNS Record Details:[/cyan]")
+            details_table = Table(show_header=False, box=None)
+            details_table.add_column("Key", style="cyan")
+            details_table.add_column("Value", style="white")
+            details_table.add_row("Domain", result.domain)
+            details_table.add_row("IP Address", result.ip)
+            details_table.add_row("Change ID", result.change_id)
+            details_table.add_row("Status", result.status)
+            console.print(details_table)
 
     except AuthenticationError as e:
         err_console.print(

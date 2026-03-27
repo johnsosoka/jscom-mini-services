@@ -140,11 +140,10 @@ class TestUpdateDns:
             "https://api.test.com/v1/dns/update",
             json={
                 "message": "DNS record updated successfully",
-                "change_info": {
-                    "id": "C1234567890ABC",
-                    "status": "PENDING",
-                    "submitted_at": "2025-11-27T12:00:00Z",
-                },
+                "domain": "mc.example.com.",
+                "ip": "203.0.113.42",
+                "change_id": "C1234567890ABC",
+                "status": "PENDING",
             },
             status=200,
         )
@@ -153,8 +152,10 @@ class TestUpdateDns:
 
         assert isinstance(result, DnsUpdateResponse)
         assert result.message == "DNS record updated successfully"
-        assert result.change_info["id"] == "C1234567890ABC"
-        assert result.change_info["status"] == "PENDING"
+        assert result.domain == "mc.example.com."
+        assert result.ip == "203.0.113.42"
+        assert result.change_id == "C1234567890ABC"
+        assert result.status == "PENDING"
 
         # Verify request
         assert len(mock_api.calls) == 1
@@ -177,7 +178,10 @@ class TestUpdateDns:
             "https://api.test.com/v1/dns/update",
             json={
                 "message": "DNS record updated",
-                "change_info": {},
+                "domain": "test.com.",
+                "ip": "1.2.3.4",
+                "change_id": "C9999999999XYZ",
+                "status": "INSYNC",
             },
             status=200,
         )
