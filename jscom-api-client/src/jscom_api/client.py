@@ -136,7 +136,10 @@ class JscomApiClient:
         try:
             return DnsUpdateResponse(
                 message=data["message"],
-                change_info=data["change_info"],
+                domain=data["domain"],
+                ip=data["ip"],
+                change_id=data["change_id"],
+                status=data["status"],
             )
         except KeyError as e:
             raise ValidationError(f"API response missing required field: {e}") from e

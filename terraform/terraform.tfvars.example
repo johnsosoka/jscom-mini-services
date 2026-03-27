@@ -1,0 +1,32 @@
+# Example Terraform variables for jscom-mini-services
+
+# Consolidated API Lambda function name
+api_lambda_function_name = "jscom-api-lambda"
+
+# Allowed Route53 hosted zones for DNS updates
+# Map of domain name to hosted zone ID
+allowed_zones = {
+  "johnsosoka.com"  = "Z1234567890ABC"
+  "sosoka.com"      = "Z2345678901BCD"
+  "sosoka.io"       = "Z3456789012CDE"
+  "sosoka.org"      = "Z4567890123DEF"
+  "section76.net"   = "Z5678901234EFG"
+  "j3bin.net"       = "Z6789012345FGH"
+  "the-homelab.net" = "Z7890123456GHI"
+}
+
+# Default TTL for DNS records (seconds)
+default_ttl = 300
+
+# Rate limiting for GET /v1/ip/my endpoint (requests per second)
+ip_endpoint_rate_limit  = 10
+ip_endpoint_burst_limit = 20
+
+# Rate limiting for POST /v1/dns/update endpoint (requests per second)
+dns_endpoint_rate_limit  = 1
+dns_endpoint_burst_limit = 5
+
+# Authentication token for protected endpoints
+# IMPORTANT: Do not commit this value. Use TF_VAR_auth_token environment variable
+# or pass via -var="auth_token=YOUR_TOKEN" at runtime
+# auth_token = "your-secret-token-here"

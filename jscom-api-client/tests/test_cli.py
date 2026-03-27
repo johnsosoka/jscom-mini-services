@@ -152,10 +152,10 @@ class TestDnsUpdateCommand:
             "https://api.johnsosoka.com/v1/dns/update",
             json={
                 "message": "DNS record updated successfully",
-                "change_info": {
-                    "id": "C1234567890ABC",
-                    "status": "PENDING",
-                },
+                "domain": "mc.example.com.",
+                "ip": "203.0.113.42",
+                "change_id": "C1234567890ABC",
+                "status": "PENDING",
             },
             status=200,
         )
@@ -194,10 +194,10 @@ class TestDnsUpdateCommand:
             "https://api.johnsosoka.com/v1/dns/update",
             json={
                 "message": "DNS record updated successfully",
-                "change_info": {
-                    "id": "C1234567890ABC",
-                    "status": "PENDING",
-                },
+                "domain": "mc.example.com.",
+                "ip": "203.0.113.42",
+                "change_id": "C1234567890ABC",
+                "status": "PENDING",
             },
             status=200,
         )
@@ -386,7 +386,10 @@ class TestDnsUpdateCommand:
                 "https://api.johnsosoka.com/v1/dns/update",
                 json={
                     "message": "DNS record updated",
-                    "change_info": {},
+                    "domain": "mc.example.com.",
+                    "ip": "203.0.113.42",
+                    "change_id": "C9876543210XYZ",
+                    "status": "INSYNC",
                 },
                 status=200,
             )
@@ -412,11 +415,10 @@ class TestDnsUpdateCommand:
             "https://api.johnsosoka.com/v1/dns/update",
             json={
                 "message": "DNS record updated successfully",
-                "change_info": {
-                    "id": "C1234567890ABC",
-                    "status": "PENDING",
-                    "submitted_at": "2025-11-27T12:00:00Z",
-                },
+                "domain": "mc.example.com.",
+                "ip": "203.0.113.42",
+                "change_id": "C1234567890ABC",
+                "status": "PENDING",
             },
             status=200,
         )
@@ -436,12 +438,11 @@ class TestDnsUpdateCommand:
         )
 
         assert result.exit_code == 0
-        assert "Change Info" in result.stdout
-        # At least one of the change_info values should be present
+        # At least one of the response values should be present
         assert (
             "C1234567890ABC" in result.stdout
             or "PENDING" in result.stdout
-            or "submitted_at" in result.stdout
+            or "mc.example.com." in result.stdout
         )
 
     def test_custom_base_url_and_token(self, mock_api, mock_env):
@@ -451,7 +452,10 @@ class TestDnsUpdateCommand:
             "https://custom.api.com/v1/dns/update",
             json={
                 "message": "DNS updated",
-                "change_info": {},
+                "domain": "mc.example.com.",
+                "ip": "203.0.113.42",
+                "change_id": "C1111111111ABC",
+                "status": "INSYNC",
             },
             status=200,
         )
@@ -484,7 +488,7 @@ class TestVersionCommand:
 
         assert result.exit_code == 0
         assert "jscom-api version" in result.stdout
-        assert "0.1.0" in result.stdout
+        assert "0.2.0" in result.stdout
 
 
 class TestNoArgsHelp:

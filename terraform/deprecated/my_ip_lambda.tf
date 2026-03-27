@@ -10,7 +10,7 @@ module "my_ip_lambda" {
   handler            = "my_ip_lambda.lambda_handler"
   runtime            = "python3.8"
   source_path        = "../lambdas/src/my_ip_lambda.py"
-  attach_policy_json = false  # No extra permissions required
+  attach_policy_json = false # No extra permissions required
   tags = {
     project = local.project_name
   }

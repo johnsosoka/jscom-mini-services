@@ -4,15 +4,23 @@ Python client and CLI for johnsosoka.com API services.
 
 ## Installation
 
+Install from GitHub:
+
 ```bash
-poetry add jscom-api
+pip install "git+https://github.com/johnsosoka/jscom-mini-services.git#subdirectory=jscom-api-client"
+```
+
+Using Poetry:
+
+```bash
+poetry add "git+https://github.com/johnsosoka/jscom-mini-services.git#subdirectory=jscom-api-client"
 ```
 
 For development:
 
 ```bash
-git clone <repository>
-cd jscom-api-client
+git clone https://github.com/johnsosoka/jscom-mini-services.git
+cd jscom-mini-services/jscom-api-client
 poetry install
 ```
 
@@ -77,8 +85,11 @@ try:
         domain="mc.example.com.",
         ip="203.0.113.42"
     )
-    print(response.message)
-    print(response.change_info)
+    print(response.message)      # "DNS record updated successfully"
+    print(response.domain)       # "mc.example.com."
+    print(response.ip)           # "203.0.113.42"
+    print(response.change_id)    # "C1234567890ABC"
+    print(response.status)       # "PENDING" or "INSYNC"
 finally:
     client.close()
 ```
